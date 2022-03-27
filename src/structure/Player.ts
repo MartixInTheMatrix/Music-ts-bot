@@ -4,7 +4,8 @@ import {
     joinVoiceChannel,
     createAudioResource,
     VoiceConnection,
-    AudioPlayer
+    AudioPlayer,
+    AudioPlayerPlayingState
 } from '@discordjs/voice';
 import ytdl from "ytdl-core"
 import search from "yt-search"
@@ -65,6 +66,12 @@ export class Player {
                 .setDescription(`${video?.description} \n\n[Lien vers la video](${video.url})`)
                 .setImage(video?.image as string)
             ]
+        })
+        this.player.on('error', ()=>{
+            console.log('erreur')
+            this.player.state.status = AudioPlayerPlayingState.P
+            this.player.pause()
+            this.player.unpause()
         })
         setTimeout(() => {
             this.queue.shift()

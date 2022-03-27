@@ -7,9 +7,7 @@ import {
 } from "../../structure/Player";
 
 export default async (Client: Client, interaction: discord.Interaction) => {
-
 	if (interaction.isCommand()) {
-		console.log('yo')
 		const command = Client.commands.get(interaction.commandName)
 
 		if (!command) return;
